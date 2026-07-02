@@ -77,7 +77,7 @@
 
 ```bash
 git clone https://github.com/AntonYurkovskiy/IntelliVision_cars_clustering
-cd IntelliVision-cars-clustering
+cd IntelliVision_cars_clustering
 
 # Создание и активация виртуального окружения (Windows)
 python -m venv .venv

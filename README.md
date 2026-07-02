@@ -53,10 +53,6 @@
 │   ├── best_clustering.csv           # путь → кластер для лучшей конфигурации (генерируется scripts/05_best_and_outliers.py)
 │   ├── figures/                      # t-SNE, сетки изображений и графики метрик
 │   └── pca_variance_analysis.csv     # сохранённая дисперсия PCA при разных n_components
-├── out_of_rep/                       # служебные файлы (не входят в git)
-│   ├── service_scripts/              # скрипты заполнения/починки ноутбуков
-│   ├── backups/                      # backup-копии ноутбуков
-│   └── notes/                        # рабочие заметки (progress.md)
 └── data/                             # сырые данные (не входят в git)
     └── IntelliVision_case/
         ├── descriptors/              # pickle-дескрипторы

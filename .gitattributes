@@ -1,0 +1,26 @@
+# Автоматическая нормализация окончаний строк для текстовых файлов
+* text=auto
+
+# Python-файлы
+*.py text eol=lf
+*.pyx text eol=lf
+
+# Jupyter-ноутбуки не считаются основным кодом в статистике GitHub
+*.ipynb linguist-documentation
+
+# Markdown и конфиги
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+
+# Бинарные файлы данных
+*.pickle binary
+*.joblib binary
+*.npy binary
+*.npz binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary

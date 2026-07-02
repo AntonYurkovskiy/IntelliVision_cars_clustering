@@ -1,0 +1,13 @@
+combination,scaler,method,n_clusters,calinski_harabasz,davies_bouldin,n_noise
+vdc_type+vdc_color,standard,minibatch_kmeans,5,61878.348245440284,2.143658377610523,0
+vdc_type+vdc_color,standard,minibatch_kmeans,10,41074.41725456775,2.2139506319630615,0
+vdc_type+vdc_color,standard,minibatch_kmeans,15,32192.02774637125,2.3110411703264306,0
+vdc_type+vdc_color,standard,kmeans,5,63661.935212267614,2.0313097342954918,0
+vdc_type+vdc_color,standard,kmeans,10,42169.802066768396,2.0447585569763542,0
+vdc_type+vdc_color,standard,kmeans,15,33183.7362977376,2.120283656358241,0
+vdc_type+osnet,standard,minibatch_kmeans,5,34611.3911903254,2.8544621422401355,0
+vdc_type+osnet,standard,minibatch_kmeans,10,22414.996257270443,2.7757408306536733,0
+vdc_type+osnet,standard,minibatch_kmeans,15,17008.86916884722,2.895948470044016,0
+vdc_type+osnet,standard,kmeans,5,35160.90632992668,2.7589124683822126,0
+vdc_type+osnet,standard,kmeans,10,23024.9565233929,2.7664350466712984,0
+vdc_type+osnet,standard,kmeans,15,18042.92560755466,2.6697591954616247,0

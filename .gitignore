@@ -1,0 +1,48 @@
+# Сырые и тяжёлые данные
+/data
+data/
+intellivision_case_files/
+
+# Python-окружение
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE / Windsurf
+.windsurf/
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb.backup
+*.ipynb.pathfix_backup
+*.ipynb.plotfix_backup
+*.ipynb.v2_backup
+
+# Тестирование
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Служебные файлы
+out_of_rep/
+progress.md
+
+# Скрипты, использовавшиеся только для заполнения/починки ноутбуков
+scripts/fill_project_6_clustering_notebook.py
+scripts/fill_project_6_clustering_notebook_v2.py
+scripts/fill_project_notebook.py
+scripts/lighten_project_notebook.py
+scripts/fix_plot_function_in_notebook.py
+scripts/fix_data_paths_in_notebooks.py
+scripts/organize_results.py
+
+# Большие сгенерированные артефакты (воспроизводятся скриптами)
+results/labels/
+results/models/
+results/outliers/
+
+# .gitignore должен быть виден в git
+!.gitignore

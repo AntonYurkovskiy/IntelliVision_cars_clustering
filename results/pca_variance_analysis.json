@@ -1,0 +1,34 @@
+[
+  {
+    "descriptor": "efficientnet-b7",
+    "scaler": "standard",
+    "n_components": 1536,
+    "explained_variance": 0.9243139624595642,
+    "peak_mb": 15524.263704299927,
+    "time_s": 459.06507205963135
+  },
+  {
+    "descriptor": "efficientnet-b7",
+    "scaler": "standard",
+    "n_components": 2048,
+    "explained_variance": 0.9656661152839661,
+    "peak_mb": 17975.587262153625,
+    "time_s": 617.4265506267548
+  },
+  {
+    "descriptor": "efficientnet-b7",
+    "scaler": "minmax",
+    "n_components": 1536,
+    "explained_variance": 0.9248230457305908,
+    "peak_mb": 15524.214761734009,
+    "time_s": 409.8286015987396
+  },
+  {
+    "descriptor": "efficientnet-b7",
+    "scaler": "minmax",
+    "n_components": 2048,
+    "explained_variance": 0.9659852981567383,
+    "peak_mb": 17975.58721637726,
+    "time_s": 578.2326729297638
+  }
+]

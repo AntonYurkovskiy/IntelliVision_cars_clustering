@@ -27,4 +27,13 @@ DESCRIPTOR_NAMES = {
 AVAILABLE_DESCRIPTORS = ["efficientnet-b7", "osnet", "vdc_color", "vdc_type"]
 
 N_COMPONENTS = 128
+
+# Maximum n_components per descriptor that fits 16 GB RAM.
+N_COMPONENTS_MAP = {
+    "efficientnet-b7": 1536,
+    "osnet": 512,
+    "vdc_type": 512,
+    "vdc_color": 128,
+}
+
 RANDOM_STATE = 42

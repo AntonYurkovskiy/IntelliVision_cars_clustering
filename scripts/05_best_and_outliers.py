@@ -10,7 +10,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from src import load_data, outliers, preprocess, visualization
-from src.config import LABELS_DIR, N_COMPONENTS, OUTLIERS_DIR, RESULTS_DIR
+from src.config import LABELS_DIR, N_COMPONENTS_MAP, OUTLIERS_DIR, RESULTS_DIR
 
 BEST_DESCRIPTOR = "vdc_type"
 BEST_SCALER = "standard"
@@ -25,11 +25,13 @@ def main():
     LABELS_DIR.mkdir(parents=True, exist_ok=True)
     OUTLIERS_DIR.mkdir(parents=True, exist_ok=True)
 
+    best_n_components = N_COMPONENTS_MAP[BEST_DESCRIPTOR]
+
     print("=== Saving best clustering CSV ===")
     images_df = load_data.load_images_paths()
     images_df = images_df.rename(columns={images_df.columns[0]: "path"})
     labels = pd.read_pickle(
-        LABELS_DIR / f"labels_{BEST_DESCRIPTOR}_{BEST_SCALER}_{BEST_METHOD}_{BEST_N_CLUSTERS}.joblib"
+        LABELS_DIR / f"labels_{BEST_DESCRIPTOR}_{BEST_SCALER}_pca{best_n_components}_{BEST_METHOD}_{BEST_N_CLUSTERS}.joblib"
     )["cluster"].values
     images_df["cluster"] = labels
     best_csv = RESULTS_DIR / "best_clustering.csv"
@@ -37,7 +39,7 @@ def main():
     print(f"Saved: {best_csv}")
 
     print("\n=== Outlier detection ===")
-    X = preprocess.load_reduced(BEST_DESCRIPTOR, BEST_SCALER, N_COMPONENTS)
+    X = preprocess.load_reduced(BEST_DESCRIPTOR, BEST_SCALER, best_n_components)
 
     for method in OUTLIER_METHODS:
         print(f"\n  {method}")

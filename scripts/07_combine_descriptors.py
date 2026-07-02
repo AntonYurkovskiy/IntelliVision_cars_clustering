@@ -11,15 +11,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from src import metrics, preprocess
-from src.config import LABELS_DIR, MODELS_DIR, RANDOM_STATE, RESULTS_DIR
-
-# Maximum n_components per descriptor that fits 16 GB RAM.
-N_COMPONENTS_MAP = {
-    "efficientnet-b7": 1536,
-    "osnet": 512,
-    "vdc_type": 512,
-    "vdc_color": 128,
-}
+from src.config import LABELS_DIR, MODELS_DIR, N_COMPONENTS_MAP, RANDOM_STATE, RESULTS_DIR
 COMBINATIONS = [
     ("vdc_type", "vdc_color"),
     ("vdc_type", "osnet"),

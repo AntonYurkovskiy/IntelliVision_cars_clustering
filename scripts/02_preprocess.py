@@ -7,15 +7,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from src import load_data, preprocess
-from src.config import AVAILABLE_DESCRIPTORS
-
-# Maximum n_components per descriptor that fits 16 GB RAM.
-N_COMPONENTS_MAP = {
-    "efficientnet-b7": 1536,
-    "osnet": 512,
-    "vdc_type": 512,
-    "vdc_color": 128,
-}
+from src.config import AVAILABLE_DESCRIPTORS, N_COMPONENTS_MAP
 SCALERS = ["standard", "minmax"]
 
 

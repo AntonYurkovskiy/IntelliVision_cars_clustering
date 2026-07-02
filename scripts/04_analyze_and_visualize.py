@@ -11,7 +11,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from src import load_data, preprocess, visualization
-from src.config import LABELS_DIR, N_COMPONENTS, RAW_DATA_DIR, RESULTS_DIR
+from src.config import LABELS_DIR, N_COMPONENTS_MAP, RAW_DATA_DIR, RESULTS_DIR
 
 N_TOP = 4
 N_SAMPLES_TSNE = 5000
@@ -33,12 +33,12 @@ def rank_configurations(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def main():
-    summary_path = RESULTS_DIR / "clustering_summary.csv"
+    summary_path = RESULTS_DIR / "clustering_summary_max_components.csv"
     df = pd.read_csv(summary_path)
     ranked = rank_configurations(df)
 
     print("=== Top configurations ===")
-    print(ranked.head(N_TOP)[["descriptor", "scaler", "method", "n_clusters", "calinski_harabasz", "davies_bouldin", "score"]])
+    print(ranked.head(N_TOP)[["descriptor", "scaler", "n_components", "method", "n_clusters", "calinski_harabasz", "davies_bouldin", "score"]])
 
     images_df = load_data.load_images_paths()
     images_df = images_df.rename(columns={images_df.columns[0]: "paths"})
@@ -48,13 +48,14 @@ def main():
         scaler = row["scaler"]
         method = row["method"]
         n_clusters = int(row["n_clusters"])
+        n_components = int(row["n_components"])
 
         print(f"\n=== Visualizing #{i+1}: {descriptor} / {scaler} / {method} / {n_clusters} clusters ===")
 
-        X = preprocess.load_reduced(descriptor, scaler, N_COMPONENTS)
+        X = preprocess.load_reduced(descriptor, scaler, n_components)
         labels_path = (
             LABELS_DIR
-            / f"labels_{descriptor}_{scaler}_{method}_{n_clusters}.joblib"
+            / f"labels_{descriptor}_{scaler}_pca{n_components}_{method}_{n_clusters}.joblib"
         )
         labels = pd.read_pickle(labels_path)["cluster"].values
 

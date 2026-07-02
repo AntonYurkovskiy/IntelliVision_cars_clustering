@@ -7,11 +7,11 @@ import pandas as pd
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
-from src.config import RESULTS_DIR
+from src.config import N_COMPONENTS_MAP, RESULTS_DIR
 
 
 def main():
-    summary = pd.read_csv(RESULTS_DIR / "clustering_summary.csv")
+    summary = pd.read_csv(RESULTS_DIR / "clustering_summary_max_components.csv")
 
     best_per_descriptor = summary.loc[
         summary.groupby("descriptor")["calinski_harabasz"].idxmax()
@@ -33,6 +33,7 @@ def main():
         "",
         f"- **Дескриптор:** {best_overall['descriptor']}",
         f"- **Масштабирование:** {best_overall['scaler']}",
+        f"- **Число компонент:** {int(best_overall['n_components'])} (максимум для 16 GB RAM)",
         f"- **Алгоритм:** {best_overall['method']}",
         f"- **Количество кластеров:** {int(best_overall['n_clusters'])}",
         f"- **Calinski-Harabasz:** {best_overall['calinski_harabasz']:.2f}",
@@ -42,6 +43,7 @@ def main():
         "",
         f"- **Дескриптор:** {best_by_db['descriptor']}",
         f"- **Масштабирование:** {best_by_db['scaler']}",
+        f"- **Число компонент:** {int(best_by_db['n_components'])} (максимум для 16 GB RAM)",
         f"- **Алгоритм:** {best_by_db['method']}",
         f"- **Количество кластеров:** {int(best_by_db['n_clusters'])}",
         f"- **Calinski-Harabasz:** {best_by_db['calinski_harabasz']:.2f}",
@@ -49,12 +51,12 @@ def main():
         "",
         "## 3. Лучшие результаты по дескрипторам",
         "",
-        "| Дескриптор | Масштабирование | Алгоритм | Кластеров | Calinski-Harabasz | Davies-Bouldin |",
-        "|------------|-----------------|----------|-----------|-------------------|----------------|",
+        "| Дескриптор | Масштабирование | Компонент | Алгоритм | Кластеров | Calinski-Harabasz | Davies-Bouldin |",
+        "|------------|-----------------|------------|----------|-----------|-------------------|----------------|",
     ]
     for _, row in best_per_descriptor.iterrows():
         lines.append(
-            f"| {row['descriptor']} | {row['scaler']} | {row['method']} | {int(row['n_clusters'])} | "
+            f"| {row['descriptor']} | {row['scaler']} | {int(row['n_components'])} | {row['method']} | {int(row['n_clusters'])} | "
             f"{row['calinski_harabasz']:.2f} | {row['davies_bouldin']:.4f} |"
         )
 
@@ -83,17 +85,18 @@ def main():
         "",
         "## 6. Рекомендации",
         "",
-        "- Для полуавтоматической разметки по типу ТС и ракурсу используй **дескриптор `vdc_type` со стандартизацией и KMeans**.",
+        "- Для полуавтоматической разметки по типу ТС и ракурсу используй **дескриптор `vdc_type` со стандартизацией и KMeans** с максимальными компонентами для 16 GB RAM.",
         "- В качестве стартовой точки бери **5 кластеров**, при необходимости дроби самые большие кластеры на подклассы.",
-        "- Для работы на машине с 16 ГБ RAM применяй **PCA до 128 компонент** — это разумный баланс памяти и дисперсии.",
+        f"- Для работы на машине с 16 GB RAM используй максимальные компоненты: `{N_COMPONENTS_MAP}` — они сохраняют наибольшую дисперсию при укладывании в память.",
         "- Для поиска редких классов используй **Isolation Forest**, а для выявления плохих или нестандартных условий съёмки — **Local Outlier Factor**.",
         "- Если позволяет память, попробуй комбинации дескрипторов: `vdc_type` + `osnet` (форма + идентификация) или `vdc_type` + `vdc_color` (тип + цвет) для более богатых многофакторных кластеров.",
+        "- Не комбинируй `efficientnet-b7` с другими дескрипторами на 16 GB RAM — риск нехватки памяти.",
         "",
         "## 7. Созданные файлы",
         "",
         "- `results/best_clustering.csv` — итоговое отображение изображение → кластер.",
         "- `results/cluster_descriptions.md` — описание кластеров и выбросов.",
-        "- `results/clustering_summary.csv` — метрики всех протестированных конфигураций.",
+        "- `results/clustering_summary_max_components.csv` — метрики всех протестированных конфигураций с максимальными компонентами.",
         "- `results/figures/` — t-SNE-графики и сетки изображений по кластерам.",
         "",
     ]

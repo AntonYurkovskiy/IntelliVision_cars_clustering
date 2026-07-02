@@ -16,6 +16,7 @@ from src.config import (
     FIGURES_DIR,
     LABELS_DIR,
     MODELS_DIR,
+    N_COMPONENTS_MAP,
     OUTLIERS_DIR,
     REDUCED_DIR,
     RESULTS_DIR,
@@ -56,13 +57,14 @@ def main():
     all_ok &= check_file(RESULTS_DIR / "final_report.md", "final report")
     all_ok &= check_file(RESULTS_DIR / "cluster_descriptions.md", "cluster descriptions")
     all_ok &= check_file(RESULTS_DIR / "best_clustering.csv", "best clustering CSV")
-    all_ok &= check_file(RESULTS_DIR / "clustering_summary.csv", "clustering summary")
-    all_ok &= check_file(RESULTS_DIR / "combined_clustering_summary.csv", "combined clustering summary")
+    all_ok &= check_file(RESULTS_DIR / "clustering_summary_max_components.csv", "clustering summary max components")
+    all_ok &= check_file(RESULTS_DIR / "combined_clustering_summary_max_components.csv", "combined clustering summary max components")
 
     print("\n=== Reduced descriptors ===")
     for descriptor in AVAILABLE_DESCRIPTORS:
+        n_components = N_COMPONENTS_MAP[descriptor]
         for scaler in ("standard", "minmax"):
-            path = REDUCED_DIR / f"{descriptor}_{scaler}_pca128.joblib"
+            path = REDUCED_DIR / f"{descriptor}_{scaler}_pca{n_components}.joblib"
             if not path.exists():
                 print(f"[MISSING] {path.name}")
                 all_ok = False

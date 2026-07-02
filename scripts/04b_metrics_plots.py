@@ -142,7 +142,7 @@ def plot_ch_vs_db_scatter(summary: pd.DataFrame):
 
 def main():
     FIGURES_DIR.mkdir(parents=True, exist_ok=True)
-    summary = pd.read_csv(RESULTS_DIR / "clustering_summary.csv")
+    summary = pd.read_csv(RESULTS_DIR / "clustering_summary_max_components.csv")
 
     plot_metrics_by_descriptor(summary)
     plot_metrics_heatmap(summary)

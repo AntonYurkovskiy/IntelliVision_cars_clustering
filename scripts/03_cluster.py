@@ -9,15 +9,7 @@ project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root))
 
 from src import clustering, metrics, preprocess
-from src.config import AVAILABLE_DESCRIPTORS, LABELS_DIR, RESULTS_DIR
-
-# Maximum n_components per descriptor that fits 16 GB RAM.
-N_COMPONENTS_MAP = {
-    "efficientnet-b7": 1536,
-    "osnet": 512,
-    "vdc_type": 512,
-    "vdc_color": 128,
-}
+from src.config import AVAILABLE_DESCRIPTORS, LABELS_DIR, N_COMPONENTS_MAP, RESULTS_DIR
 N_CLUSTERS_LIST = [5, 10, 15]
 SCALERS = ["standard", "minmax"]
 METHODS = ["minibatch_kmeans", "kmeans"]

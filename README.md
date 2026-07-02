@@ -76,7 +76,7 @@
 ### Клонирование и запуск
 
 ```bash
-git clone https://github.com/ТВОЙ_ЛОГИН/IntelliVision-cars-clustering.git
+git clone https://github.com/AntonYurkovskiy/IntelliVision_cars_clustering
 cd IntelliVision-cars-clustering
 
 # Создание и активация виртуального окружения (Windows)
